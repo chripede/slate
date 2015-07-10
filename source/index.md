@@ -22,7 +22,7 @@ search: true
 Welcome to the AccuRanker Partner API. You can use our API to get search results for
 the keywords you post to it.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+**Remember** nothing is final yet. We're still in beta and welcome suggestions.
 
 If you want to experiment with the API, you can perform live requests from our
 [API console](https://apigee.com/accuranker/embed/console/accuranker).
@@ -54,7 +54,7 @@ being requested. For instance:
 
 `/status?auth_token=your-auth-token`
 
-The `auth_token` parameter is left out of the examples on this page. You must always include it. If missing you will receive an error like:
+The `auth_token` parameter is left out of the examples on this page. **You must always include it**.
 
 <aside class="notice">
 You must replace <code>your-auth-token</code> with your personal API key.
@@ -115,13 +115,6 @@ your current limits and your remaining API units.
 ### HTTP Request
 
 `GET http://api.accuranker.com/status`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
 
 <aside class="success">
 Remember — you must include the auth_token as a parameter in your request!
@@ -188,6 +181,12 @@ curl "http://api.accuranker.com/engines"
 
 This endpoint will return a list of all search engines and their supported locales.
 
+To use a search engine when you queue a keyword, you must specify the engine,
+found in the key `engine` and the locale you want to search.
+
+For instance to search Google in the United States your parameters should
+be `engine=google` and `locale=en-us`.
+
 ### HTTP Request
 
 `GET http://api.accuranker.com/engines`
@@ -241,6 +240,7 @@ callback | false | | This URL will receive the callback when the search is compl
 geo | false | | Set the geo-location of the search.
 mobile | false | false | Search as a mobile device.
 tablet | false | false | Search as a tablet.
+save_html | false | false | Save the HTML output as well as the JSON. This will incur extra charges.
 
 ## Callback
 
@@ -265,7 +265,7 @@ status_code | 200 | <TODO>
 status_description | Success | <TODO>
 rank_date | 2015-12-01 | Date (in UTC) of the search.
 json_callback | | URL to query for the parsed JSON result.
-html_callback | | URL to query for the raw HTML result.
+html_callback | | URL to query for the raw HTML result (if included).
 keyword | search for | Keyword searched for.
 engine | google | Engine searched.
 locale | en-us | Locale searched.
