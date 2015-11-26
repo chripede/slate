@@ -22,8 +22,6 @@ search: true
 Welcome to the AccuRanker Partner API. You can use our API to get search results for
 the keywords you post to it.
 
-**Remember** nothing is final yet. We're still in beta and welcome suggestions.
-
 If you want to experiment with the API, you can perform live requests from our
 [API console](https://apigee.com/accuranker/embed/console/accuranker).
 
@@ -72,7 +70,7 @@ You must replace <code>your-auth-token</code> with your personal API key.
 ```
 
 To ensure stability of the system, all accounts have rate limits in place.
-The starting rate limits are 1000 `POST`s and 2000 `GET`s per hour.
+The starting rate limits are 10,000 `POST`s and 20,000 `GET`s per hour.
 
 Calls to certain endpoints does not impact your limits. You can use the status
 endpoint to view your current limits without impacting your current limit.
@@ -99,11 +97,11 @@ curl "http://api.accuranker.com/status"
 {
     "limits": {
         "current": {
-            "get": 2000,
-            "post": 1000
+            "get": 20000,
+            "post": 10000
         },
-        "get": 2000,
-        "post": 1000
+        "get": 20000,
+        "post": 10000
     },
     "units": 9428470
 }
@@ -205,6 +203,8 @@ curl "http://api.accuranker.com/keywords"
 
 ```json
 {
+  "id": "5fa506b9-b600-45e1-a7ea-2c2dee48a451",
+  "est_time_to_complete": 10,
   "callback": "http://requestb.in/xfel53xf",
   "engine": "google",
   "keyword": "search for",
@@ -349,5 +349,5 @@ id | true | | The ID is returned in the callback.
 format | false | json | This can be either json or html.
 
 <aside class="notice">
-Remember — search results are only stored for seven days, so remember to get the result before that.
+JSON results are stored for seven days. HTML results are stored for one day.
 </aside>
